@@ -1,10 +1,10 @@
 #!/usr/bin/make -f
 
-# MACHINE examples: et4x00 et5x00 et6x00 et9x00 dm500hd dm800se dm7020hd dm8000 xp1000
+# MACHINE examples: ventonhdx
 MACHINE ?= ${subst /,,${subst build-,,${firstword ${dir ${wildcard build-*/}}}}}
 
 ifeq "$(MACHINE)" ""
-	MACHINE=et9x00
+	MACHINE=ventonhdx
 endif
 
 # Adjust according to the number CPU cores to use for parallel build.
