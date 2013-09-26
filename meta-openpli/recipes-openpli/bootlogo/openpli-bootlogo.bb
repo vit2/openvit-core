@@ -8,7 +8,7 @@ require conf/license/openpli-gplv2.inc
 RDEPENDS_${PN} += "showiframe"
 
 PV = "3.0"
-PR = "r15"
+PR = "r16"
 
 S = "${WORKDIR}/"
 
@@ -61,13 +61,8 @@ do_install() {
 	done;
 	install -d ${D}/${sysconfdir}/init.d
 	install -m 0755 ${S}/bootlogo.sh ${D}/${sysconfdir}/init.d/bootlogo
-}
-
-inherit deploy
-do_deploy() {
-	if [ -e splash.bin ]; then
-		install -m 0644 splash.bin ${DEPLOYDIR}/splash.bin
-	fi
+	
+	install -m 0644 splash.bin ${DEPLOYDIR}/splash.bin
 }
 
 pkg_preinst_${PN}_dreambox() {
