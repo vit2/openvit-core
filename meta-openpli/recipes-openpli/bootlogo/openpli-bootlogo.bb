@@ -8,7 +8,7 @@ require conf/license/openpli-gplv2.inc
 RDEPENDS_${PN} += "showiframe"
 
 PV = "3.0"
-PR = "r17"
+PR = "r18"
 
 S = "${WORKDIR}/"
 
@@ -44,8 +44,15 @@ MVI = "${SWITCHOFFMVI} bootlogo.mvi"
 MVISYMLINKS = "bootlogo_wait backdrop"
 
 do_install() {
-	if [ -n "${BRANDINGDIR}" -a -d "${BRANDINGDIR}/bootlogo" ] ; then
-		cp -p ${BRANDINGDIR}/bootlogo/* ${S}/.
+	if [ -n "${BRANDINGDIR}" ] ; then
+		# copy generic logo stuff
+		if [ -d "${BRANDINGDIR}/bootlogo" ] ; then
+			cp -p ${BRANDINGDIR}/bootlogo/* ${S}/.
+		fi
+		# copy specific logo stuff
+		if [ -d "${BRANDINGDIR}/bootlogo-${MACHINE}" ] ; then
+			cp -p ${BRANDINGDIR}/bootlogo-${MACHINE}/* ${S}/.
+		fi
 	fi
 
 	install -d ${D}/boot
